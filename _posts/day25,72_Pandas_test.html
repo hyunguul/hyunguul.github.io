@@ -1,0 +1,769 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>day25,72_Pandas</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ffcf50fa-b517-4f66-b98b-341c47584b61" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/512px-Pandas_mark.svg.png"/></div><h1 class="page-title">day25,72_Pandas</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr></tbody></table></header><div class="page-body"><p id="7da677e8-eb60-43d0-9bec-913bb318015f" class="">
+</p><p id="e15a0127-e5b4-45dd-991a-704c19cbdc55" class="">
+</p><ul id="3f468afa-ea5b-4239-988f-d56ca4bc5e1d" class="bulleted-list"><li style="list-style-type:disc"><strong>Docs</strong><ul id="c38097a3-fddc-4d5b-aee4-93ab564a11ca" class="bulleted-list"><li style="list-style-type:circle"><a href="https://pandas.pydata.org/docs/getting_started/index.html">https://pandas.pydata.org/docs/getting_started/index.html</a></li></ul><ul id="3924d4b9-65f5-46ab-9dc4-b5d9830998b8" class="bulleted-list"><li style="list-style-type:circle"><a href="https://pandas.pydata.org/docs/reference/index.html">https://pandas.pydata.org/docs/reference/index.html</a></li></ul></li></ul><p id="72f7f391-ba9c-40c4-8365-668acf071cf6" class="">
+</p><p id="7c80a053-cbda-47b2-a447-d1d1e2119583" class="">
+</p><ul id="69ae93ae-af58-4076-ae7b-3e6644c306fc" class="bulleted-list"><li style="list-style-type:disc"><strong>Pandas 라이브러리가 필요한 이유 </strong> <ul id="6dbec540-980f-4258-84b0-b927c430b108" class="bulleted-list"><li style="list-style-type:circle">csv 파일 - 표 형태 데이터 작업 → 복잡, 귀찮    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="221bee7b-3d37-466a-bd5b-cea74c0ca79d" class="code"><code class="language-Python"># temp 컬럼만 리스트로 가져오기 _ csv
+
+import csv
+
+with open(&quot;weather_data.csv&quot;) as data_file:
+    data = csv.reader(data_file)
+    temperatures = []
+    for row in data:
+        if row[1] != &quot;temp&quot;:
+            temperatures.append(int(row[1]))
+    print(temperatures)</code></pre><figure id="86c28924-daa0-4fe3-94f2-61ba01859da5" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled.png"><img style="width:960px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled.png"/></a></figure><ul id="e4698dd4-c605-44f6-8e4d-666a962281dd" class="bulleted-list"><li style="list-style-type:square">cf. CSV(Comma Separated Values): 콤마로 분류된 데이터 형태     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="26b375a9-db63-4dfb-9ef3-c34211b73723" class="code"><code class="language-Python">with open(&quot;weather_data.csv&quot;) as data_file:
+    data = data_file.readlines()
+    print(data)</code></pre><figure id="3eed91f8-6908-49ec-affa-87a79109adcf" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%201.png"><img style="width:288px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%201.png"/></a></figure></li></ul></li></ul><hr id="00e7a134-5fbb-4fd2-8c1f-bc1333db7dbb"/><ul id="a56a8480-b51c-4a0a-8d06-76b013d195de" class="bulleted-list"><li style="list-style-type:circle">pandas 라이브러리 - 표 형태 데이터 작업 → 간편, 용이  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1e83b741-a712-4b1a-ab55-f727cefef3e9" class="code"><code class="language-Python"># temp 컬럼만 리스트로 가져오기 _ pandas   
+
+import pandas
+
+data = pandas.read_csv(&quot;weather_data.csv&quot;)
+print(data[&quot;temp&quot;])</code></pre><figure id="f85f9ad1-d882-46eb-9168-e108a0793a7b" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%202.png"><img style="width:528px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%202.png"/></a></figure></li></ul></li></ul><p id="10c146de-08bb-4bb5-abdc-32a5bcafe666" class="">
+</p><p id="ae05a972-1faf-487d-8120-de28f7001cf5" class="">
+</p><ul id="aaa3e7e3-da1e-4db8-8224-f5e475aef317" class="bulleted-list"><li style="list-style-type:disc"><strong>Pandas Data Type</strong><ul id="eb5266bb-5b2f-4751-86f8-aae464586b22" class="bulleted-list"><li style="list-style-type:circle"><strong>DataFrame</strong><figure id="a1bf24d8-1e52-47fa-90c7-2d0d0f071ccf" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%203.png"><img style="width:432px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%203.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a6e3d8cc-e8fb-4c4e-8c93-5f3611622053" class="code"><code class="language-Python">import pandas
+
+data = pandas.read_csv(&quot;weather_data.csv&quot;)
+print(type(data))
+
+&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;</code></pre></li></ul><ul id="77ba04c2-7f85-4ef1-b131-f97055927ef6" class="bulleted-list"><li style="list-style-type:circle"><strong>Series</strong><figure id="d97de005-3bba-43ff-91c0-a32a67c3e784" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/0af7933d-1073-4e87-8e73-c6b947bd3af7.png"><img style="width:432px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/0af7933d-1073-4e87-8e73-c6b947bd3af7.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a2d7909a-8c07-4032-b3d2-db0688f14e29" class="code"><code class="language-Python">import pandas
+
+data = pandas.read_csv(&quot;weather_data.csv&quot;)
+print(type(data[&quot;temp&quot;]))
+
+&lt;class &#x27;pandas.core.series.Series&#x27;&gt;</code></pre></li></ul></li></ul><p id="b2752d27-cc89-4f7a-878f-d36cf83281bf" class="">
+</p><p id="fb4c37bc-a335-4d90-99f8-3908d06c4057" class="">
+</p><p id="ea9ef280-359f-4d71-ac49-5cbe8a3ff110" class="">
+</p><ul id="48096ec0-45c9-43e3-83ab-4fd952afcc6c" class="bulleted-list"><li style="list-style-type:disc">연습 <figure id="5d79d927-3d71-44eb-a1f1-db016e358bda" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%204.png"><img style="width:240px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%204.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="76f71fae-e3c7-41be-8f64-d454f10513d4" class="code"><code class="language-Python">import pandas
+
+data = pandas.read_csv(&quot;weather_data.csv&quot;)</code></pre><table id="0411573c-8e9a-465c-bfc0-89a31dc870d5" class="simple-table"><tbody><tr id="2ffeef06-c3a6-4c2f-b14b-5120dcb9cc08"><td id="p}jc" class="" style="width:172.3984375px">딕셔너리로 출력 </td><td id="JJgv" class="" style="width:534px">data_dict = data.to_dict()</td></tr><tr id="9f292089-9589-42c1-a53f-728cb6f92c6b"><td id="p}jc" class="" style="width:172.3984375px">리스트로 출력 </td><td id="JJgv" class="" style="width:534px">temp_list = data[&quot;temp&quot;].to_list()</td></tr><tr id="cf773470-09b8-4a27-9fba-f483761c83bf"><td id="p}jc" class="" style="width:172.3984375px">칼럼 평균값 </td><td id="JJgv" class="" style="width:534px">average_temp = <em>sum</em>(temp_list) / <em>len</em>(temp_list)<br/>data[&quot;temp&quot;].mean()<br/></td></tr><tr id="e1f4c5f7-b84e-47d2-b7ce-9f0062dcaa95"><td id="p}jc" class="" style="width:172.3984375px">칼럼 최댓값 </td><td id="JJgv" class="" style="width:534px">data[&quot;temp&quot;].max()</td></tr><tr id="97d12f5c-30c5-4d6a-acb5-2f5444978035"><td id="p}jc" class="" style="width:172.3984375px"><em>Get Data in Columns</em></td><td id="JJgv" class="" style="width:534px">data[&quot;condition&quot;]<br/>data.condition<br/></td></tr><tr id="10eb09b5-aa98-4a4f-9b6a-d940e7a3ff45"><td id="p}jc" class="" style="width:172.3984375px"><em>Get Data in Rows</em></td><td id="JJgv" class="" style="width:534px"># 컬럼이 월요일인 행을 출력  <br/>data[data.day == &quot;Monday&quot;]<br/># 가장 높은 온도의 행을 출력<br/>data[data.temp == data.temp.max()]<br/></td></tr><tr id="703fcbc3-e9b1-4cea-9999-7445f29c1c61"><td id="p}jc" class="" style="width:172.3984375px"><em>Create a dataframe</em></td><td id="JJgv" class="" style="width:534px">data_dict = {<br/>    &quot;students&quot;: [&quot;Amy&quot;, &quot;James&quot;, &quot;Angela&quot;],<br/>    &quot;scores&quot;: [76, 56, 65]<br/>}<br/>data = pandas.DataFrame(data_dict)<br/></td></tr><tr id="29200f63-3e7c-4df0-a828-6ec5c68c8c48"><td id="p}jc" class="" style="width:172.3984375px">csv 파일로 저장   </td><td id="JJgv" class="" style="width:534px">data.to_csv(&quot;new_data.csv&quot;)</td></tr></tbody></table></li></ul><p id="3bbbac9d-c224-42cb-bb07-157e006ec220" class="">
+</p><p id="ecb16484-a88c-4462-96a4-717ca9b6f6e0" class="">
+</p><p id="d72308a0-96c4-4268-bf78-b85afa0f494c" class="">
+</p><ul id="3528bfa5-34c0-4f31-bec7-d0c3fb4165ba" class="bulleted-list"><li style="list-style-type:disc">실습1: 센트럴 파크 다람쥐 데이터 분석 <figure id="3054c4d9-8afe-4a20-bf6f-3ab3208e86c0" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%205.png"><img style="width:1152px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%205.png"/></a></figure><ul id="a65a1d54-3c64-472b-bf2e-6b913139decf" class="bulleted-list"><li style="list-style-type:circle">센트럴 파크 다람쥐 데이터 csv 파일에서 → pandas 이용하여, 색깔별  다람쥐 개체수 테이블 뽑아내기    </li></ul><ul id="9d0e972d-4e67-4f19-adf4-f0c63910a272" class="bulleted-list"><li style="list-style-type:circle">만들어낸  다람쥐 색깔별 개체수 테이블 →  quirrel_count.csv 파일 생성           </li></ul><ul id="c16bd917-34d4-4484-8db1-ad24b414d147" class="bulleted-list"><li style="list-style-type:circle">결과<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="54434d6e-eaf6-4141-9270-f7776fdaa3e9" class="code"><code class="language-Python">#(sol1: 강의 풀이)
+import pandas
+data = pandas.read_csv(&quot;2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240629.csv&quot;)
+grey_squirrels_count = len(data[data[&quot;Primary Fur Color&quot;] == &quot;Gray&quot;])
+red_squirrels_count = len(data[data[&quot;Primary Fur Color&quot;] == &quot;Cinnamon&quot;])
+black_squirrels_count = len(data[data[&quot;Primary Fur Color&quot;] == &quot;Black&quot;])
+data_dict = {
+    &quot;Fur Color&quot;: [&quot;Gray&quot;, &quot;Cinnamon&quot;, &quot;Black&quot;],
+    &quot;Count&quot;: [grey_squirrels_count, red_squirrels_count, black_squirrels_count]
+}
+df = pandas.DataFrame(data_dict)
+df.to_csv(&quot;squirrel_count.csv&quot;)
+
+#(sol2: 마이 풀이) 
+import pandas
+data = pandas.read_csv(&quot;2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240629.csv&quot;)
+color_count = data[&quot;Primary Fur Color&quot;].value_counts()
+color_count.to_csv(&quot;squirrel_count_by_colors&quot;)</code></pre></li></ul></li></ul><p id="c8c8ae87-d7b4-4454-8be7-4ea4566bf169" class="">
+</p><p id="544e5fa1-146a-43d2-b810-37a8f38cc1d1" class="">
+</p><p id="93979e1e-0258-4389-b3f1-9530e64bfe35" class="">
+</p><ul id="b85f9998-b426-4ba4-b5c6-6aec2ab6d6d2" class="bulleted-list"><li style="list-style-type:disc">실습2: 미국 주 게임<ul id="d95f35a7-59d7-4641-ab36-48fb7825c7af" class="bulleted-list"><li style="list-style-type:circle">  </li></ul></li></ul><p id="636e44a6-0045-4632-8fda-b95d40fb8049" class="">
+</p><p id="bf128cb4-43a9-4bb1-bb57-f3cdc19f5f37" class="">
+</p><p id="d97f01ea-6d38-43ec-ae5a-e98e9cd59a04" class="">
+</p><p id="1886aec2-4204-45bd-a6af-fcba3446b5ea" class="">
+</p><p id="9920029c-e1bc-45da-abea-b7a94e88fe37" class="">
+</p><p id="050e6a12-f54f-4481-9860-ba5b38f976e4" class="">
+</p><p id="3af98940-0be5-4e21-9e5d-86ff2865c07a" class="">
+</p><p id="4eb40838-20f8-459a-acb8-23e5d677d825" class="">
+</p><ul id="3be2d59b-7754-4757-ada5-29c4295d3749" class="bulleted-list"><li style="list-style-type:disc">프로젝트1: 판다스(Pandas)로 졸업생의 전공별 졸업 후 급여를 분석을 통한 데이터 탐색 배우기<ul id="e94f04e6-49ba-4a61-9b2a-8725ba6756b1" class="bulleted-list"><li style="list-style-type:circle">대학 학위는 <em>매우</em> 비쌉니다. 그러나 학위가 돈을 갚아주나요? <br/>철학이나 국제 관계를 전공으로 선택하면 부모님을 걱정하게 만들죠, 그런데 부모님의 우려가 데이터로 증명이 될까요? <br/></li></ul><ul id="297296ca-f9f5-469b-8d27-e6f50222b77a" class="bulleted-list"><li style="list-style-type:circle">PayScale Inc.는 학사 학위만 있는 120만 명의 미국인을 대상으로 1년 동안 설문조사를 실시했습니다. </li></ul><ul id="be5a77af-54a6-4c79-9637-24baff46fe7b" class="bulleted-list"><li style="list-style-type:circle">이 데이터를 자세히 살펴보며 판다스를 사용하여 다음 질문에 답을 해보겠습니다.<ul id="ffe4f05c-8931-47ff-951d-6a10152fffdd" class="bulleted-list"><li style="list-style-type:square">초봉이 가장 높은 학위는 무엇일까?</li></ul><ul id="09332770-3d51-418a-9a02-91e9c69c95ae" class="bulleted-list"><li style="list-style-type:square">대학 졸업 후 소득이 가장 낮은 전공은 무엇일까?</li></ul><ul id="947b5ffe-187f-44a5-8ec4-1c636f97a0bd" class="bulleted-list"><li style="list-style-type:square">어떤 학위가 가장 높은 소득 잠재력을 가지고 있을까?</li></ul><ul id="13dccdbf-b8fa-4d9a-8510-25226572b5e3" class="bulleted-list"><li style="list-style-type:square">소득 관점에서 위험성이 가장 낮은 대학 전공은 무엇일까?</li></ul><ul id="1d623b27-1c95-406a-81d4-efdad7f773e0" class="bulleted-list"><li style="list-style-type:square">경영이나 STEM(과학, 기술, 공학, 수학), HASS(인문, 예술, 사회 과학) 학위가 평균적으로 더 많은 소득을 벌까?</li></ul></li></ul></li></ul><p id="7ac7c4a9-9597-487a-b986-fb239ed3bba1" class="">
+</p><ul id="2998a630-1923-46a8-bf0e-a944d2ddd150" class="bulleted-list"><li style="list-style-type:disc">오늘 배울 것은 아래와 같습니다.<ul id="ebaa270d-f7ba-449a-92e3-a2e04ac39c3a" class="bulleted-list"><li style="list-style-type:circle">판다스 데이터프레임(DataFrame)을 탐색하는 방법</li></ul><ul id="ab659d21-6951-4ba7-8964-bb985c86979d" class="bulleted-list"><li style="list-style-type:circle">NaN(Not a Number, 숫자 아님) 값을 감지하고 데이터를 정리하는 방법</li></ul><ul id="fbb5857b-66a9-4356-aab9-df9c4400501c" class="bulleted-list"><li style="list-style-type:circle">특정 열, 행 및 개별 셀을 선택하는 방법</li></ul><ul id="e9fb7fad-19d8-46a1-b8de-64447c5e1242" class="bulleted-list"><li style="list-style-type:circle">데이터를 정렬하는 방법</li></ul><ul id="4396caa6-3a9e-4cec-91ef-0d86bf6de9d3" class="bulleted-list"><li style="list-style-type:circle">범주별로 데이터를 그룹화하는 방법</li></ul></li></ul><p id="783aa6a9-c369-4715-96e5-5b4845f50c25" class="">
+</p><p id="d9c1da67-ada6-406e-947c-aedc9e7e0a01" class="">
+</p><p id="15aed253-2293-452c-8e0e-ba08dd95d745" class="">
+</p><h1 id="86473c41-cb91-454c-9d44-1f5483d25ffa" class=""><strong>판다스를 이용한 예비 데이터 탐색 및 데이터 정리</strong></h1><blockquote id="8e3c2599-1879-4d44-8cf4-caae0bfc6d7a" class="">이것은 어떤 데이터 과학 프로젝트에서도 마찬가지로 거치는 첫 번째 단계: 작업 중인 데이터가 무엇인지 이해하기 위해 자세히 살펴봐야 한다.  </blockquote><ul id="f68597e7-1b70-467d-97a7-27606dd4a968" class="bulleted-list"><li style="list-style-type:disc"><strong>행과 열 확인</strong><table id="af04f283-def8-419f-9a47-53a88646c866" class="simple-table"><tbody><tr id="8bb7a83c-9fd6-44fc-94a3-58a5dc72475f"><td id="{va^" class=""><code>.head()</code></td><td id="jRw&gt;" class="" style="width:163px">상위 5개 </td></tr><tr id="bf24df31-077c-4acc-9f66-78f2af689dcc"><td id="{va^" class=""><code>.tail()</code></td><td id="jRw&gt;" class="" style="width:163px">하위 5개 </td></tr><tr id="b1a99641-47e9-4a5d-ab70-68d6ae24a9ad"><td id="{va^" class=""><code>.shape</code></td><td id="jRw&gt;" class="" style="width:163px">행과 열의 개수  </td></tr><tr id="d093e914-c1f9-4348-885b-99b58e1f4ba2"><td id="{va^" class=""><code>.columns</code></td><td id="jRw&gt;" class="" style="width:163px">열의 이름 </td></tr></tbody></table><ul id="c94257cb-df36-456a-8a6c-8558a6187052" class="bulleted-list"><li style="list-style-type:circle">데이터프레임에는 몇 개의 행, 몇 개의 열이 있나요?<ul id="21c667f9-821f-4ad9-9a98-3ff3ca364f14" class="bulleted-list"><li style="list-style-type:square"><code>df.head()</code>: 상위 5개 행 나열   </li></ul><ul id="5a28233b-52cb-4d28-90a3-c6972a23924f" class="bulleted-list"><li style="list-style-type:square"><code>df.shape</code>: 행과 열의 개수<figure id="092cd571-b6f1-4b6c-bb49-b46b6b0ec1f2" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-25-16-cd50d633f77245b7763d832704e7bf05.png"><img style="width:528px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-25-16-cd50d633f77245b7763d832704e7bf05.png"/></a></figure></li></ul></li></ul><ul id="fb901e07-5de9-48db-ada4-31d4bf08e3d6" class="bulleted-list"><li style="list-style-type:circle">열의 레이블은 무엇인가요? 열에 이름이 있나요?<ul id="548041ad-4b72-4c26-8409-7d31b082d275" class="bulleted-list"><li style="list-style-type:square"> <code>df.columns</code>: 열 이름 나열  </li></ul></li></ul></li></ul><ul id="3a3785d6-e8ba-4ba6-b9c4-5dbf75b85ecf" class="bulleted-list"><li style="list-style-type:disc"><strong>결측값 및 정크 데이터</strong><p id="d590aad7-8ddb-436c-834b-31fe1c244587" class="">분석을 진행하기 전에 데이터프레임에 누락된 데이터 또는 정크 데이터는 없는지 확인해야 합니다. 그렇게 하여 나중에 일어날 수 있는 문제를 피할 수 있거든요. <br/>이 경우, 데이터프레임에 NaN(Not a Number, 숫자 아님) 값을 찾아보겠습니다. NaN 값은 빈 셀 또는 숫자 대신 문자열을 포함하는 셀입니다. <br/></p><table id="0100b730-4b7d-46d6-8e9f-b274caf49c55" class="simple-table"><tbody><tr id="ea33180d-bad4-4380-87ed-eb0c7cba154c"><td id="GC}X" class=""><code>.findna()</code></td><td id="^a&gt;O" class="" style="width:285.99737548828125px">NaN(not a number, 숫자 아님) 값 찾기 </td></tr><tr id="bfe87ffe-97a0-491b-9fbd-a80a4bd40dad"><td id="GC}X" class=""><code>.isna()</code></td><td id="^a&gt;O" class="" style="width:285.99737548828125px">결측값 확인 </td></tr><tr id="2af3bfe0-1e6f-40cd-9045-370254059ddf"><td id="GC}X" class=""><code>.dropna()</code></td><td id="^a&gt;O" class="" style="width:285.99737548828125px">결측값 제거 </td></tr></tbody></table><ul id="97dd6f6d-5eb0-4568-87ac-d0fb44be551a" class="bulleted-list"><li style="list-style-type:circle">데이터프레임에 누락된 값이 있나요? 데이터프레임에 잘못된 데이터가 포함되어 있지는 않나요?<ul id="9b1f6c3d-fafa-4fa8-a4db-fcb4e7bfcddd" class="bulleted-list"><li style="list-style-type:square"><code>df.isna()</code> : 결측값 확인 </li></ul><ul id="c2f3ee11-fcba-4542-a66c-631629955338" class="bulleted-list"><li style="list-style-type:square"><code>df.dropna()</code>: 결측값 제거 </li></ul><ul id="c0dc9a6c-32ca-4fed-9621-37ead02064f9" class="bulleted-list"><li style="list-style-type:square"><code>df.tail()</code> : 하위 5개 행 나열    <figure id="a0ef1113-1ae0-48db-852e-17e0b53deab1" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-35-12-4320cf381d16ea74700b9f103ddd6842.png"><img style="width:624px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-35-12-4320cf381d16ea74700b9f103ddd6842.png"/></a></figure></li></ul></li></ul></li></ul><p id="0bb35bd3-03b2-4100-9443-63ef67de1627" class="">
+</p><p id="668c53c5-9308-48ac-9062-72f93cb4564f" class="">
+</p><p id="1ec3d610-30db-443d-b3d3-808b8575f6e8" class="">
+</p><h1 id="4c532c35-b03f-4d42-b068-eecacf140ce0" class=""><strong>데이터프레임에 있는 열 및 개별 셀에 접근하기</strong></h1><table id="467d390e-0ac4-4bee-a4ec-02c59f85b61d" class="simple-table"><tbody><tr id="131758bc-f6b8-4037-af5e-4387c634f3aa"><td id="`h?z" class="" style="width:471px"><code>df[&#x27;column name&#x27;]</code><br/><br/><code>df[[&#x27;column name 1&#x27;, &#x27;column name 2&#x27;, &#x27;column name 3&#x27;]]</code></td><td id="H@f^" class="" style="width:555px">[] 표기를 이용하여 데이터프레임의 전체 열에 접근</td></tr><tr id="246c8bdd-76c4-41b1-8241-dab2f9801c44"><td id="`h?z" class="" style="width:471px"><code>df[&#x27;column name&#x27;][index]</code><br/><br/><code>df[&#x27;column name&#x27;].loc[index]</code></td><td id="H@f^" class="" style="width:555px">데이터프레임에 있는 개별 셀에 접근</td></tr><tr id="ea8edb6f-5f6a-4490-84a1-c9807ca572f8"><td id="`h?z" class="" style="width:471px"><code>.max()</code></td><td id="H@f^" class="" style="width:555px">최댓값</td></tr><tr id="1f014be3-06c9-469a-ada6-746d80aa43e6"><td id="`h?z" class="" style="width:471px"><code>.min()</code></td><td id="H@f^" class="" style="width:555px">최솟값</td></tr><tr id="9883782a-daf3-4e01-87b3-3f5dc1726978"><td id="`h?z" class="" style="width:471px"><code>.idxmax()</code></td><td id="H@f^" class="" style="width:555px">최댓값 위치 </td></tr><tr id="8e174ae3-117b-4489-80ef-a205d19297e6"><td id="`h?z" class="" style="width:471px"><code>.idxmin()</code></td><td id="H@f^" class="" style="width:555px">최솟값 위치 </td></tr></tbody></table><ul id="64d0a10f-f972-4188-81ce-4d317f69aba7" class="bulleted-list"><li style="list-style-type:disc"><strong>초봉이 가장 높은 대학 전공 찾기?</strong><ul id="60eef06e-e0df-45cf-b3e0-836341dac3be" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df[&#x27;Starting Median Salary&#x27;]</code><figure id="18f7c4d5-6391-4a9c-a659-d42a90cc8944" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-43-02-a2d17fe32f141cfc42f3b7c60d7b646c.png"><img style="width:372px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-43-02-a2d17fe32f141cfc42f3b7c60d7b646c.png"/></a></figure></li></ul><ul id="043ec6d4-3c7d-4cbd-8c19-66ae56f0217c" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df[&#x27;Starting Median Salary&#x27;].max()</code> : 가장 큰 행의 값   </li></ul><ul id="f79f4141-a5de-42ec-ab89-794483f91d4d" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df[&#x27;Starting Median Salary&#x27;].idxmax()</code> : 가장 큰 값을 가진 행에 대한 인덱스</li></ul><ul id="0cf1eca0-7f9e-4af6-a2ea-f22582eba63d" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df[&#x27;Undergraduate Major&#x27;][43]</code></li></ul><ul id="9976d464-9666-4aea-975e-084a8e414795" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df[&#x27;Undergraduate Major&#x27;].loc[43]</code> : 해당 인덱스 위치의 속성 값    <figure id="f0de026d-0dbe-471a-9621-f04692eae25a" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-56-10-07043fb3a8bb6a9f4fd3e5d17f4319d5.png"><img style="width:432px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-56-10-07043fb3a8bb6a9f4fd3e5d17f4319d5.png"/></a></figure></li></ul><ul id="30c8ac17-baed-4731-8dd5-88e74749cf2c" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df.loc[43]</code> : 특정 열을 지정하지 않으면 .loc 속성을 사용하여 전체 행을 검색<figure id="98f28038-4870-4d98-9c9c-4f7d0deef241" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-58-08-1c59109dc860ad3b4571bc492a16445b.png"><img style="width:630px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_11-58-08-1c59109dc860ad3b4571bc492a16445b.png"/></a></figure></li></ul></li></ul><ul id="7da07080-be58-4d91-a782-55f0308986df" class="bulleted-list"><li style="list-style-type:disc"><strong>초봉이 가장 낮은 대학 전공은 무엇이며 졸업 후 졸업생은 얼마를 벌까?</strong></li></ul><ul id="0466cb6f-1736-4497-9f82-a3f1f0232fb0" class="bulleted-list"><li style="list-style-type:disc"><strong>중간 경력 봉급이 가장 낮은 대학 전공은 무엇이며 이 학위로 얼마를 벌 수 있을까?</strong></li></ul><ul id="7e6993f4-aeac-4986-8ee6-b496b149fb92" class="bulleted-list"><li style="list-style-type:disc"><strong>중간 경력 봉급이 가장 높은 대학 전공은? 이 전공 졸업생들은 얼마를 벌까? (중간 경력은 10년 이상의 경력으로 정의합니다.)</strong></li></ul><p id="4c2ab0b2-66dc-4b9a-9c2a-66704652970c" class="">
+</p><p id="ef33a67f-b33a-49c1-a993-4ffc47f45fdf" class="">
+</p><p id="07dfd01b-98b2-4025-ba9e-acec68b2f3e6" class="">
+</p><h1 id="cbea4dae-576e-4cef-8719-d710b7800db7" class=""><strong>값 분류 및 열 추가하기: 잠재력이 가장 큰 전공 대 위험도가 가장 낮은 전공</strong></h1><table id="1e7ac373-932f-4fdd-889e-baeac6155bcf" class="simple-table"><tbody><tr id="18e8b835-1493-43ad-a34b-b6593aa0559f"><td id="Sl@R" class=""><code>.subtract()</code></td><td id="OqZI" class="" style="width:373px">컬럼 간의 빼기  </td></tr><tr id="8ab6c41d-9f48-41d8-9aed-f3a966bc65f1"><td id="Sl@R" class=""><code>.sort_values()</code></td><td id="OqZI" class="" style="width:373px">데이터프레임 정렬, 분류</td></tr><tr id="bdc4916d-5915-444a-bffe-73c59a7d95e3"><td id="Sl@R" class=""><code>.insert()</code></td><td id="OqZI" class="" style="width:373px">새로운 열 추가</td></tr></tbody></table><ul id="b1b69fcc-0acf-45b2-a26d-6bf93748b78f" class="bulleted-list"><li style="list-style-type:disc"><strong>위험도가 가장 낮은 전공?<br/><br/></strong>저위험 전공은 최저 급여와 최고 급여의 차이가 작은 학위입니다. <br/>다른 말로, 여러분 전공에서 10번째 백분위수와 90번째 백분위수 소득의 차이가 작으면, 여러분이 졸업 후 받게 될 급여에 대해 더 확신할 수 있겠죠.<br/>10번째 백분위수와 90번째 백분위수 소득 간의 차이를 어떻게 계산할까요? <br/>판다스를 사용하면 전체 열에 대해 간단한 산술 연산을 수행할 수 있으므로 두 열의 차이를 취하기만 하면 됩니다.<br/><ul id="7cf8bd8f-ddc4-49a5-844d-c0d2548202f0" class="bulleted-list"><li style="list-style-type:circle"><code>spread_col = clean_df[&#x27;Mid-Career 90th Percentile Salary&#x27;].subtract(clean_df[&#x27;Mid-Career 10th Percentile Salary&#x27;])</code>: 빼기<ul id="af11c8fe-c379-4646-a2df-c81a893caf8c" class="bulleted-list"><li style="list-style-type:square"><code>spread_col = clean_df[&#x27;Mid-Career 90th Percentile Salary&#x27;] - clean_df[&#x27;Mid-Career 10th Percentile Salary&#x27;]</code></li></ul></li></ul><ul id="ab8afac7-48e4-4171-b6f4-03595b12a68b" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df.insert(1, &#x27;Spread&#x27;, spread_col)</code> : 기존 데이터프레임에 컬럼 추가  <figure id="a5aaeca0-6fba-400a-bd32-564d1e0ddeb3" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-10-35-1520a94db77897101844ff463324112a.png"><img style="width:816px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-10-35-1520a94db77897101844ff463324112a.png"/></a></figure></li></ul><ul id="6c99a94d-d530-4998-9fa1-ded5dfd39e15" class="bulleted-list"><li style="list-style-type:circle"><code>low_risk = clean_df.sort_values(&#x27;Spread&#x27;)</code> : 오름차순 정렬 <ul id="91153cb0-a944-4c86-b662-e5d2a3875dbb" class="bulleted-list"><li style="list-style-type:square">파이썬 노트북에서 키보드의 shift + tab 키를 사용하여 문서를 바로 불러올 수도 있다.</li></ul><ul id="f2a0d4d4-235b-4768-99f6-3a584d2d2c30" class="bulleted-list"><li style="list-style-type:square"><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html</a></li></ul></li></ul><ul id="c86f744c-c758-436f-b7a8-e8c7a0bcfe5b" class="bulleted-list"><li style="list-style-type:circle"><code>low_risk[[&#x27;Undergraduate Major&#x27;, &#x27;Spread&#x27;]].head()</code><figure id="a41ad947-6eee-41de-b3de-0a33d9599c1c" class="image"><a href="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%206.png"><img style="width:384px" src="day25,72_Pandas%20ffcf50fab5174f66b98b341c47584b61/Untitled%206.png"/></a></figure></li></ul></li></ul><ul id="83d70dac-daae-45a1-8e30-815875fd1d66" class="bulleted-list"><li style="list-style-type:disc"><strong>.sort_values() 메소드를 사용하여 잠재력이 가장 높은 학위를 찾을 수 있을까요? 90번째 백분위수에서 가장 높은 값을 가진 상위 5 학위를 찾아 보세요.</strong></li></ul><ul id="cab2c8e3-ce80-4496-844c-a1ff11578af7" class="bulleted-list"><li style="list-style-type:disc"><strong>또한 급여에서 가장 큰 분포를 보이는 학위를 찾으십시오. 졸업 후 고소득자와 저소득자 사이 소득 차이가 가장 큰 전공은 무엇일까요?</strong></li></ul><p id="4bb5524a-76d4-44b7-a050-7958aa0cb018" class="">
+</p><p id="2e97dffb-b1a9-40f9-9522-e3ccb5ad868c" class="">
+</p><p id="1db9aa90-339c-4bfb-a7ad-7a869458fe2a" class="">
+</p><p id="5d2ee8e9-ca4b-438d-8f4a-c4701fce52e8" class="">
+</p><h1 id="631ee9c6-9ea0-4f88-b834-06cca84322fa" class=""><strong>판다스를 이용한 그룹화 및 피벗</strong></h1><blockquote id="ae8c358b-3508-436d-8774-99e0f1e40239" class="">특정 범주에 있는 행의 합을 구하고자 할 때가 자주 있죠. </blockquote><table id="43909e0f-e816-4800-b46e-bf970c9217ec" class="simple-table"><tbody><tr id="5c084b53-97a6-499a-96ad-1be898826565"><td id="JKk?" class=""><code>.groupby()</code></td><td id="wJdI" class="" style="width:538px">특정 범주에 속하는 항목을 그룹화하여 엑셀 스타일 피벗 테이블을 생성</td></tr></tbody></table><ul id="e7a5f2fe-3b2a-488d-b5a9-deb0db909b06" class="bulleted-list"><li style="list-style-type:disc"><strong>평균 봉급이 가장 높은 학위 범주는 어디인가요?</strong> STEM, 경영, HASS(인문, 예술, 사회 과학) 중 어디인가요?<ul id="48315889-761c-477d-98cc-970761bf7bdf" class="bulleted-list"><li style="list-style-type:circle"><code>clean_df.groupby(&#x27;Group&#x27;).count()</code><figure id="1e1fcfff-3c5d-4227-9c57-001f4960624c" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-45-49-042eeb486294d63c68c3334bc7b062da.png"><img style="width:912px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-45-49-042eeb486294d63c68c3334bc7b062da.png"/></a></figure></li></ul><ul id="e8b10c92-991b-46c8-b2ae-ccd75a2e0fbc" class="bulleted-list"><li style="list-style-type:circle"><code>lean_df.groupby(&#x27;Group&#x27;).mean()</code><figure id="bb24049a-105d-4be3-bd13-a265bb5b6897" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-47-11-d18a831086743cc64e2779b4b791dcd7.png"><img style="width:912px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-47-11-d18a831086743cc64e2779b4b791dcd7.png"/></a></figure></li></ul></li></ul><ul id="b47eafff-d368-458a-8ece-5a5b2ebdcb11" class="bulleted-list"><li style="list-style-type:disc"><strong>출력에서 숫자 형식</strong><ul id="94d20594-4637-4b56-89db-de7a964bc721" class="bulleted-list"><li style="list-style-type:circle"><code>pd.options.display.float_format = &#x27;{:,.2f}&#x27;.format</code><figure id="fe7ccca7-850f-421c-97b8-b69ef74ef69d" class="image"><a href="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-49-50-81fee388ca0de81b4f791e6481392d76.png"><img style="width:912px" src="https://img-c.udemycdn.com/redactor/raw/2020-09-22_14-49-50-81fee388ca0de81b4f791e6481392d76.png"/></a></figure></li></ul></li></ul><p id="166854c3-26a5-426c-9279-27b01758668d" class="">
+</p><p id="bd9553bf-edb1-4749-a041-1b77811ef073" class="">
+</p><p id="1b60b6ec-7740-42a2-a89f-d50f9b0d49af" class="">
+</p><p id="32563e49-7e06-4c8a-bd54-902e591d9b49" class=""><strong>추가 점수 획득:</strong></p><p id="121fe4c4-71c2-49c5-b726-f62f8ed21e97" class="">이 강의에서 사용한 페이스케일 데이터셋은 2008년 자료이며, 이전 10년에 대한 것입니다. <br/>당시 재정학이 학위 후 수입에서 어떻게 이런 높은 순위를 차지했을까요. <br/>하지만 우리 모두는 그 해에 막대한 재정적 위기가 있었다는 것을 알고 있죠. 아마도 상황은 그때와 같지 않을 거에요. <br/>이전 강의(예를 들어 45일차)에서 웹 스크래핑에 대해 배운 것을 사용하여 아래 코멘트에 있는 <br/><a href="https://www.payscale.com/college-salary-report/majors-that-pay-you-back/bachelors">페이스케일웹사이트</a>에서 변경된 정보를 공유해줄 수 있나요?</p><p id="ec260355-85ef-4037-b392-339bf03a12f6" class="">
+</p><p id="caf254e1-1486-4bf0-97ae-c8073fafe972" class="">
+</p><p id="76d0b3d5-0547-4eea-a8d4-6b2c68aa4182" class="">
+</p><p id="2e4dcfb6-e848-4ede-bdfe-1fa0c5fdcb8f" class="">
+</p><p id="53ea9cc1-cbf9-4ec5-8045-91aad8f1c7f3" class="">
+</p><p id="c3d3cf17-2049-4088-84d0-383b45bd72c7" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
